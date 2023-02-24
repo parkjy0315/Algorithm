@@ -1,5 +1,5 @@
 class Solution {
     public int solution(int[] box, int n) {
-        return (int)(box[0] / n) * (int)(box[1] / n) * (int)(box[2] / n);
+        return (box[0] / n) * (box[1] / n) * (box[2] / n);
     }
 }
