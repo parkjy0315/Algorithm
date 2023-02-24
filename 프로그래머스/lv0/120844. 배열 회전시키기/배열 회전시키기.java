@@ -3,18 +3,15 @@ import java.util.stream.Collectors;
 
 class Solution {
     public int[] solution(int[] numbers, String direction) {
-        int [] answer = null;
+        List<Integer> list = Arrays.stream(numbers).boxed().collect(Collectors.toList());
+        
         if (direction.equals("right")) {
-            List<Integer> list = Arrays.stream(numbers).boxed().collect(Collectors.toList());
-            list.remove(numbers.length - 1);
-            list.add(0, numbers[numbers.length - 1]);
-            answer = list.stream().mapToInt(Integer::intValue).toArray();
+            list.add(0, list.get(list.size() - 1));
+            list.remove(list.size() - 1);
         } else {
-            List<Integer> list = Arrays.stream(numbers).boxed().collect(Collectors.toList());
+            list.add(list.get(0));
             list.remove(0);
-            list.add(numbers[0]);
-            answer = list.stream().mapToInt(Integer::intValue).toArray();
         }
-        return answer;
+        return list.stream().mapToInt(Integer::intValue).toArray();
     }
 }
