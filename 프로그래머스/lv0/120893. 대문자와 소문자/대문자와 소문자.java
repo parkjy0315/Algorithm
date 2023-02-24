@@ -1,10 +1,7 @@
+import java.util.stream.Collectors;
+
 class Solution {
     public String solution(String my_string) {
-        String answer = "";
-        for(char c : my_string.toCharArray()) {
-            if (Character.isUpperCase(c)) answer += Character.toLowerCase(c);
-            else answer += Character.toUpperCase(c);
-        }
-        return answer;
+        return my_string.chars().mapToObj(c-> (String.valueOf((char) (Character.isLowerCase(c) ? Character.toUpperCase(c) : Character.toLowerCase(c))))).collect(Collectors.joining());
     }
 }
