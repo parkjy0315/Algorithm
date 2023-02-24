@@ -1,11 +1,10 @@
+import java.util.stream.*;
+
 class Solution {
     public String solution(String cipher, int code) {
-        String answer = "";
-        for(int i=0; i<cipher.length(); i++) {
-            if((i+1) % code == 0) {
-                answer += cipher.charAt(i);
-            }
-        }
-        return answer;
+        return IntStream.range(0, cipher.length())
+            .filter(i -> (i+1) % code == 0)
+            .mapToObj(i -> String.valueOf(cipher.charAt(i)))
+            .collect(Collectors.joining());
     }
 }
