@@ -1,11 +1,7 @@
+import java.util.stream.Collectors;
+
 class Solution {
     public String solution(int age) {
-        String answer = "";
-        
-        for(char c : String.valueOf(age).toCharArray()) {
-            answer += (char)('a' - '0' + c);
-        }
-        
-        return answer;
+        return String.valueOf(age).chars().mapToObj(c -> String.valueOf((char)(49 + c))).collect(Collectors.joining());
     }
 }
