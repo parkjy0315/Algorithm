@@ -8,7 +8,7 @@ class Solution {
             if (dist == temp) {
                 answer = answer > num ? num : answer;
             }
-            if (dist > temp) {
+            else if (dist > temp) {
                 answer = num;
                 dist = temp;
             }
