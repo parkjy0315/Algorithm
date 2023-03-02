@@ -1,13 +1,10 @@
+import java.util.*;
+import java.util.stream.*;
+
 class Solution {
     public String[] solution(String myStr, int n) {
-        int length = (int)Math.ceil((double)myStr.length() / n);
-        String[] answer = new String[length];
-        for(int i=0; i<length; i++) {
-            int start = i * n;
-            int end = (i+1) * n < myStr.length() ? (i+1) * n : myStr.length();
-            answer[i] = myStr.substring(start, end);
-        }
-
-        return answer;
+        return IntStream.range(0, (int)Math.ceil((double)myStr.length() / n))
+                .mapToObj(i -> i == myStr.length() / n ? myStr.substring(i * n) : myStr.substring(i * n, (i + 1) * n))
+                .toArray(String[]::new);
     }
 }
