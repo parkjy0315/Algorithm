@@ -1,20 +1,15 @@
 import java.util.*;
+import java.util.stream.*;
 
 
 class Solution {
     public int solution(String[] spell, String[] dic) {
-        int answer = 2;
-        for(int i=0; i<dic.length; i++) {
-            int temp = 0;
-            for(int j=0; j<spell.length; j++) {
-                if (dic[i].contains(spell[j])) {
-                    temp++;
-                }
-            }
-            if(temp == spell.length) {
-                answer = 1;
-            }
-        }
-        return answer;
+         return Arrays.stream(dic)
+             .map(s -> s.chars().sorted()
+             .mapToObj(i -> String.valueOf((char)i))
+             .collect(Collectors.joining()))
+             .collect(Collectors.toList())
+             .contains(Arrays.stream(spell).sorted()
+                       .collect(Collectors.joining())) ? 1 : 2;
     }
 }
