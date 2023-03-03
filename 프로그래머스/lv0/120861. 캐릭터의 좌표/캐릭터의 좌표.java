@@ -1,7 +1,7 @@
 class Solution {
-    public int[] solution(String[] keyinput, int[] board) {
+    public int[] solution(String[] keyInput, int[] board) {
         int [] answer = {0, 0};
-        for(String key : keyinput) {
+        for(String key : keyInput) {
             switch(key) {
                 case "up":
                     if(!(answer[1] + 1 > board[1] / 2))
