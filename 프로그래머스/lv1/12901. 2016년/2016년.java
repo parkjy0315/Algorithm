@@ -1,14 +1,7 @@
 import java.util.*;
 class Solution {
-    Map<Integer, String> map = new HashMap<>(){{
-        put(0, "FRI");
-        put(1, "SAT");
-        put(2, "SUN");
-        put(3, "MON");
-        put(4, "TUE");
-        put(5, "WED");
-        put(6, "THU");
-    }};
+    String [] dayOfWeeks = {
+        "FRI", "SAT", "SUN", "MON", "TUE", "WED", "THU"};
     int [] dates = {
             31, 29, 31, 30,
             31, 30, 31, 31,
@@ -23,6 +16,6 @@ class Solution {
             totalDate += dates[i];    
         }
         
-        return map.get(totalDate % 7);
+        return dayOfWeeks[totalDate % 7];
     }
 }
