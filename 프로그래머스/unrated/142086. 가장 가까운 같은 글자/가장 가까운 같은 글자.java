@@ -6,14 +6,8 @@ class Solution {
         Map<String, Integer> map = new HashMap<>();
         String [] split = s.split("");
         for(int i=0; i<s.length(); i++) {
-            Integer index = map.get(split[i]);
-            if(index != null) {
-                answer[i] = i - index;
-                map.put(split[i], i);
-            } else {
-                answer[i] = -1;
-                map.put(split[i], i);
-            }
+            answer[i] = i - map.getOrDefault(split[i], i + 1);
+            map.put(split[i], i);
         }
         return answer;
     }
