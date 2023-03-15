@@ -21,14 +21,13 @@ class Solution {
 
         // 맵을 기준으로 신고 기준에 적합한 이름 찾기
         for(String key : reportMap.keySet()) {
-            // 신고 기준에 적합한 이름을 신고한 사람의 처리 결과를 갱신
+            // 신고 기준에 적합한 이름으로 신고한 사람의 처리 결과를 갱신
             Set<String> set = reportMap.get(key);
-            if(set.stream().count() >= k) {
+            if(set.stream().count() >= k)
+                // 처리 결과 맵(이름(String), 메일 받을 횟수(Integer))에 갱신
                 set.stream().forEach(id -> mailMap.put(id, mailMap.get(id) + 1));
-            }
         }
 
-        // 처리 결과 맵(이름(String), 메일 받을 횟수(Integer))에 처리 결과 내역 저장
         return mailMap.values().stream().mapToInt(Integer::intValue).toArray();
     }
 }
