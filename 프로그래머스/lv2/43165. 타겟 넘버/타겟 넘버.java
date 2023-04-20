@@ -1,18 +1,15 @@
-import java.util.Arrays;
-
 class Solution {
-    public int dfs(int[] numbers, int index, int target) {
+    public int dfs(int[] numbers, int sum, int index, int target) {
         if (index == numbers.length) {
-            return Arrays.stream(numbers).sum() == target ? 1 : 0;
+            return sum == target ? 1 : 0;
         }
-        int res = dfs(numbers, index + 1, target);
-        numbers[index] *= -1;
-        res += +dfs(numbers, index + 1, target);
-        return res;
+
+        return dfs(numbers, sum + numbers[index], index + 1, target)
+             + dfs(numbers, sum - numbers[index], index + 1, target);
     }
 
     public int solution(int[] numbers, int target) {
-        int answer = dfs(numbers, 0, target);
+        int answer = dfs(numbers, 0, 0, target);
         return answer;
     }
 }
