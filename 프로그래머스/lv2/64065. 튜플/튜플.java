@@ -3,6 +3,7 @@ import java.util.stream.Collectors;
 
 class Solution {
     public int[] solution(String s) {
+        Set<Integer> set = new LinkedHashSet<>();
         // 주어진 s를 각 집합으로 쪼갠 후 정렬
         String [] split = Arrays.stream(s.split("[{}]"))
                 .filter(i -> !i.equals("") && !i.equals(","))
@@ -17,19 +18,11 @@ class Solution {
             List<Integer> list = Arrays.stream(temp.split(","))
                     .mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
 
-            if (list.size() == 1) {
-                answer[index++] = list.get(0);
+            for(int value : list) {
+                set.add(value);
             }
-            else {
-                List<Integer> tempList = new ArrayList<>(list);
-                for(int i=0; i<preList.size(); i++) {
-                    tempList.remove(preList.get(i));
-                }
-                answer[index++] = tempList.get(0);
-            }
-            preList = list;
         }
 
-        return answer;
+        return set.stream().mapToInt(Integer::intValue).toArray();
     }
 }
