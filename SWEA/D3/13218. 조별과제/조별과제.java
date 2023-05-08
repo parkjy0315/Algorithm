@@ -1,0 +1,15 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+class Solution {
+
+    public static void main(String args[]) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(br.readLine());
+
+        for(int test = 1; test <= T; test++) {
+            int num = Integer.parseInt(br.readLine());
+            System.out.printf("#%d %d\n", test, num / 3);
+        }
+    }
+}
