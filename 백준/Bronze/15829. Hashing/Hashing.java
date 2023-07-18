@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.math.BigInteger;
 import java.util.Arrays;
 
 class Main {
@@ -15,14 +16,14 @@ class Main {
         int L = Integer.parseInt(br.readLine());
         String input = br.readLine();
 
-        long H = 0;
+        BigInteger H = new BigInteger("0");
         char[] charArr = input.toCharArray();
         for (int i = 0; i < L; i++) {
-            char ch = charArr[i];
-            long num = ch - 'a' + 1;
-            H += num * Math.pow(r, i);
+            BigInteger num = new BigInteger(String.valueOf(charArr[i] - 'a' + 1));
+            BigInteger temp = new BigInteger(String.valueOf((int)Math.pow(r, i)));
+            H = H.add(num.multiply(temp));
         }
-        bw.write(H % M + "\n");
+        bw.write(H.mod(new BigInteger(String.valueOf(M))) + "\n");
 
         bw.close();
         br.close();
