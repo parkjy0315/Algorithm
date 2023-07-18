@@ -11,15 +11,16 @@ class Main {
 
         int N = Integer.parseInt(br.readLine());
 
-        int[] arr = new int[N];
-        for (int i = 0; i < N; i++) {
-            arr[i] = Integer.parseInt(br.readLine());
+        int[] cnt = new int[10001];
+        for (int i = 1; i <= N; i++) {
+            cnt[Integer.parseInt(br.readLine())]++;
         }
 
-        Arrays.sort(arr);
-
-        for (int i = 0; i < N; i++) {
-            bw.write(arr[i] + "\n");
+        for (int i = 0; i < cnt.length; i++) {
+            while (cnt[i] > 0) {
+                bw.write(i + "\n");
+                cnt[i]--;
+            }
         }
 
         bw.close();
