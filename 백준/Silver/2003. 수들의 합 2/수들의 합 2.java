@@ -12,22 +12,21 @@ class Main {
 
         int[] arr = Arrays.stream(br.readLine().split(" "))
                 .mapToInt(Integer::parseInt).toArray();
-        int[] addMatrix = new int[N];
-        int count = 0;
+        int count = 0, sum = 0;
+        int end = 0;
 
-        for (int i = 0; i < N; i++) {
-            for (int j = i; j < N; j++) {
-                if (j == i) {
-                    addMatrix[j] = arr[i];
-                } else {
-                    addMatrix[j] = addMatrix[j-1] + arr[j];
-                }
-
-                if (addMatrix[j] == M) {
-                    count++;
-                }
+        for (int start = 0; start < N; start++) {
+            while (sum < M && end < N) {
+                sum += arr[end++];
             }
+
+            if (sum == M) {
+                count++;
+            }
+
+            sum -= arr[start];
         }
+
 
         bw.write(count + "\n");
 
@@ -35,3 +34,8 @@ class Main {
         br.close();
     }
 }
+
+
+
+
+
