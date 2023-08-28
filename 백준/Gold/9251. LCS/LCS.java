@@ -14,8 +14,6 @@ class Main {
 
         int[][] LCS = new int[len1 + 1][len2 + 1];
 
-        int max = 0;
-
         for (int i = 0; i < len1 + 1; i++) {
             for (int j = 0; j < len2 + 1; j++) {
                 if (i == 0 || j == 0) {
@@ -25,14 +23,10 @@ class Main {
                 } else {
                     LCS[i][j] = Math.max(LCS[i - 1][j], LCS[i][j - 1]);
                 }
-
-                if (LCS[i][j] > max) {
-                    max = LCS[i][j];
-                }
             }
         }
 
-        bw.write(max + "\n");
+        bw.write(LCS[len1][len2] + "\n");
 
         bw.close();
         br.close();
