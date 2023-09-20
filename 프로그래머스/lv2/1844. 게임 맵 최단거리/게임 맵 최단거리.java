@@ -1,29 +1,22 @@
 import java.util.*;
 
 class Solution {
-    private int n;
-    private int m;
-    private boolean[][] visited;
     private int[] dx = {1, 0, -1, 0};
     private int[] dy = {0, 1, 0, -1};
     private int maxCount = -1;
 
     public int solution(int[][] maps) {
-        n = maps.length;
-        m = maps[0].length;
-        visited = new boolean[n][m];
+        int n = maps.length;
+        int m = maps[0].length;
+        boolean[][] visited = new boolean[n][m];
+
         for (int i=0; i<n; i++) {
             Arrays.fill(visited[i], false);
         }
 
-        bfs(maps);
-
-        return maxCount;
-    }
-
-    public void bfs(int[][] maps) {
         Queue<State> queue = new LinkedList<>();
         queue.add(new State(0, 0, 0));
+        visited[0][0] = true;
 
         while(!queue.isEmpty()) {
             State current = queue.poll();
@@ -31,10 +24,7 @@ class Solution {
             int currY = current.y;
 
             if (currX == n - 1 && currY == m - 1) {
-                if (maxCount < current.count + 1) {
-                    maxCount = current.count + 1;
-                    continue;
-                }
+                return current.count + 1;
             }
 
             for (int i=0; i<4; i++) {
@@ -49,6 +39,8 @@ class Solution {
                 }
             }
         }
+
+        return -1;
     }
 }
 
