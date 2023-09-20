@@ -10,10 +10,6 @@ class Solution {
         int m = maps[0].length;
         boolean[][] visited = new boolean[n][m];
 
-        for (int i=0; i<n; i++) {
-            Arrays.fill(visited[i], false);
-        }
-
         Queue<State> queue = new LinkedList<>();
         queue.add(new State(0, 0, 0));
         visited[0][0] = true;
