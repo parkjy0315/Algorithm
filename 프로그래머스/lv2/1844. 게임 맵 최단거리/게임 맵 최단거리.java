@@ -11,7 +11,7 @@ class Solution {
         boolean[][] visited = new boolean[n][m];
 
         Queue<State> queue = new LinkedList<>();
-        queue.add(new State(0, 0, 0));
+        queue.add(new State(0, 0, 1));
         visited[0][0] = true;
 
         while(!queue.isEmpty()) {
@@ -20,7 +20,7 @@ class Solution {
             int currY = current.y;
 
             if (currX == n - 1 && currY == m - 1) {
-                return current.count + 1;
+                return current.count;
             }
 
             for (int i=0; i<4; i++) {
