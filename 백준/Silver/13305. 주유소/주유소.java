@@ -24,7 +24,7 @@ public class Main {
 
 
         int gas = gasPrice[0];
-        int total = gas * distance[0];
+        long total = gas * distance[0];
         for (int i=1; i<N - 1; i++) {
             gas = Math.min(gasPrice[i], gas);
             total += gas * distance[i];
