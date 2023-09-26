@@ -1,0 +1,5 @@
+-- 의류 쇼핑몰에 가입한 회원 정보 
+-- USER_INFO(USER_ID, GENDER, AGE, JOINED)
+SELECT COUNT(*)
+FROM USER_INFO U
+WHERE U.AGE is NULL;
