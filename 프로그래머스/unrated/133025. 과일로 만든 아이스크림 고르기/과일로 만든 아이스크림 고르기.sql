@@ -1,0 +1,7 @@
+-- 아이스크림 총 주문량이 3000보다 높고
+-- 주 성분이 과일인 
+-- 아이스크림의 맛을 총주문량이 큰 순서대로 조회
+SELECT I.FLAVOR
+FROM ICECREAM_INFO I, FIRST_HALF F
+WHERE I.FLAVOR = F.FLAVOR AND F.TOTAL_ORDER > 3000 AND I.INGREDIENT_TYPE = 'fruit_based'
+ORDER BY F.TOTAL_ORDER DESC;
