@@ -1,3 +1,3 @@
 -- 동물 보호소에 몇마리 들어왔는지 조회
-SELECT COUNT(*) 
+SELECT COUNT(*) AS COUNT
 FROM ANIMAL_INS;
