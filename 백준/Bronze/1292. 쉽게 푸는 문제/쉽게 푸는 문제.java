@@ -18,6 +18,10 @@ public class Main {
                 if (A <= index && index <= B) {
                     sum += i;
                 }
+
+                if (index > B) {
+                    break;
+                }
                 index++;
             }
             if (index > B) {
