@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.io.*;
 
 public class Main {
     static int R, C;
@@ -7,8 +7,8 @@ public class Main {
     static int max = 0;
 
     // 상하좌우 이동
-    static int[] dx = {-1, 1, 0, 0};
-    static int[] dy = {0, 0, -1, 1};
+    static int[] dx = { -1, 1, 0, 0 };
+    static int[] dy = { 0, 0, -1, 1 };
 
     public static void dfs(int x, int y, int depth) {
         // 현재 위치의 알파벳 방문 처리
@@ -33,21 +33,27 @@ public class Main {
         visited[board[x][y] - 'A'] = false;
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        R = sc.nextInt();
-        C = sc.nextInt();
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        String[] input = br.readLine().split(" ");
+        R = Integer.parseInt(input[0]);
+        C = Integer.parseInt(input[1]);
         board = new char[R][C];
 
         // 입력 처리
         for (int i = 0; i < R; i++) {
-            String line = sc.next();
+            String[] line = br.readLine().split("");
             for (int j = 0; j < C; j++) {
-                board[i][j] = line.charAt(j);
+                board[i][j] = line[j].charAt(0);
             }
         }
 
-        dfs(0, 0, 1);  // (0,0)에서 시작, 깊이 1부터
-        System.out.println(max);
+        dfs(0, 0, 1); // (0,0)에서 시작, 깊이 1부터
+        bw.write("" + max);
+
+        bw.close();
+        br.close();
     }
 }
