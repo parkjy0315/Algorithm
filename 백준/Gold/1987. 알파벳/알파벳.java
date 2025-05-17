@@ -51,7 +51,7 @@ public class Main {
         }
 
         dfs(0, 0, 1); // (0,0)에서 시작, 깊이 1부터
-        bw.write("" + max);
+        bw.write(String.format("%d", max));
 
         bw.close();
         br.close();
