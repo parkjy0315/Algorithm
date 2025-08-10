@@ -7,14 +7,21 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int N = Integer.parseInt(br.readLine());
-        int[] sizes = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-        String[] input = br.readLine().split(" ");
-        int T = Integer.parseInt(input[0]);
-        int P = Integer.parseInt(input[1]);
+
+        int[] sizes = Arrays.stream(br.readLine().split(" "))
+                .mapToInt(Integer::parseInt)
+                .toArray();
+
+        int[] TP = Arrays.stream(br.readLine().split(" "))
+                .mapToInt(Integer::parseInt)
+                .toArray();
+
+        int T = TP[0];
+        int P = TP[1];
 
         int tCount = 0;
         for (int size : sizes) {
-            tCount += size % T == 0 ? size / T : size / T + 1;
+            tCount += (int) Math.ceil(size / (double) T);
         }
 
         int pCount = N / P;
