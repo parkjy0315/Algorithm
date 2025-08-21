@@ -2,67 +2,54 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
-/*
-1. 현재 큐의 가장 앞에 있는 문서의 중요도 확인
-2. 나머지 문서 중 현재 문서보다 중요도 높은 문서가 있다면 인쇄 x, 맨 뒤 배치
-3.
- */
-
-class PrintInfo {
-    int priority;
-    int index;
-
-    public PrintInfo(int priority, int index) {
-        this.priority = priority;
-        this.index = index;
-    }
-}
-
-
-class Main {
-    public static void main(String args[]) throws Exception {
+public class Main {
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int T = Integer.parseInt(br.readLine());
-        for (int test = 0; test < T; test++) {
-            String[] input = br.readLine().split(" ");
-            int N = Integer.parseInt(input[0]);
-            int M = Integer.parseInt(input[1]);
+		int T = Integer.parseInt(br.readLine());
 
-            int[] priorities = Arrays.stream(br.readLine().split(" "))
-                    .mapToInt(Integer::parseInt)
-                    .toArray();
+		for (int t = 0; t < T; t++) {
+			String[] input = br.readLine().split(" ");
+			int N = Integer.parseInt(input[0]);
+			int M = Integer.parseInt(input[1]);
 
-            List<PrintInfo> queue = new ArrayList<>();
-            for (int i = 0; i < N; i++) {
-                queue.add(new PrintInfo(priorities[i], i));
-            }
+			String[] numbers = br.readLine().split(" ");
 
-            int step = 1;
-            while (!queue.isEmpty()) {
-                PrintInfo head = queue.remove(0);
-                int max = head.priority;
-                for (int i = 0; i < queue.size(); i++) {
-                    PrintInfo temp = queue.get(i);
-                    if (temp.priority > max) {
-                        max = temp.priority;
-                    }
-                }
+			Queue<int[]> queue = new LinkedList<>();
+			for (int i = 0; i < N; i++) {
+				queue.add(new int[]{i, Integer.parseInt(numbers[i])});
+			}
 
-                if (max != head.priority) {
-                    queue.add(head);
-                } else {
-                    if (head.index == M) {
-                        bw.write(step + "\n");
-                        break;
-                    }
-                    step++;
-                }
-            }
-        }
+			int count = 0;
+			while(!queue.isEmpty()) {
+				int[] current = queue.poll();
+				int max = current[1];
+				
+				for (int[] arr : queue) {
+					if (max < arr[1]) {
+						max = arr[1];
+						break;
+					}
+				}
+
+				if (max == current[1]) {
+					count++;
+
+					if (current[0] == M) {
+						break;
+					}
+				} else {
+					queue.add(current);
+				}
+			}
+
+			bw.write(count + "\n");
+		}
+        
 
         bw.close();
         br.close();
