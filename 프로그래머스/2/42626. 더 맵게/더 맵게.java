@@ -1,22 +1,25 @@
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 class Solution {
-    public int solution(int[] scoville, int k) {
-        PriorityQueue<Double> minHeap = new PriorityQueue<>() {{
-            for (int i = 0; i < scoville.length; i++) add((double)scoville[i]);
-        }};
+	public int solution(int[] scoville, int k) {
+		Queue<Double> minHeap = new PriorityQueue<>(){{
+			for (int s : scoville) 
+				add((double)s);
+		}};
 
-        int answer = 0;
-        while (minHeap.size() >= 2 && minHeap.peek() < k) {
-            double lowest = minHeap.peek(); minHeap.remove();
-            double lowest2 = minHeap.peek(); minHeap.remove();
-            minHeap.add(lowest + lowest2 * 2);
-            answer++;
-        }
+		int mixCount = 0;
+		while (minHeap.size() >= 2 && minHeap.peek() < k) {
+			double firstMin = minHeap.poll();
+			double secondMin = minHeap.poll();
+			minHeap.add(firstMin + (secondMin * 2));
+			mixCount++;
+		}
 
-        if (minHeap.size() <= 1 && minHeap.peek() < k)
-            answer = -1;
-        
-        return answer;
-    }
+		if (minHeap.size() <= 1 && minHeap.peek() < k) {
+			return -1;
+		}
+
+		return mixCount;
+	}
 }
