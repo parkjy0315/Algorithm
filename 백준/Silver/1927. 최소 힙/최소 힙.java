@@ -1,27 +1,27 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.PriorityQueue;
 
-class Main {
-    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
+public class Main {
     public static void main(String[] args) throws Exception {
-        int N = Integer.parseInt(br.readLine());
-        Queue<Integer> heap = new PriorityQueue<>();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        for (int i=0; i<N; i++) {
-            int input = Integer.parseInt(br.readLine());
+		int N = Integer.parseInt(br.readLine());
 
-            // 2번 연산
-            if (input == 0) {
-                int res = heap.isEmpty() ? 0 : heap.poll();
-                bw.write(res + "\n");
-            }
-            // 1번 연산
-            else {
-                heap.add(input);
-            }
-        }
+		PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+		for (int i = 0; i < N; i++) {
+			int input = Integer.parseInt(br.readLine());
+
+			if (input > 0) {
+				minHeap.add(input);
+			} 
+			else if (input == 0) {
+				bw.write((minHeap.isEmpty() ? 0 : minHeap.poll()) + "\n");
+			}	
+		}
 
         bw.close();
         br.close();
