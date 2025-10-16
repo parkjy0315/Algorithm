@@ -25,17 +25,17 @@ public class Main {
     public static String bfs(int A, int B) {
         Queue<Integer> queue = new LinkedList<>();
         boolean[] visited = new boolean[10000];
-        String[] commands = new String[10000];
+        int[] prev = new int[10000];
+        char[] commands = new char[10000];
 
         queue.add(A);
         visited[A] = true;
-        commands[A] = "";
 
         while (!queue.isEmpty()) {
             int current = queue.poll();
 
             if (current == B) {
-                return commands[current];
+                break;
             }
 
             int[] nextNumbers = { D(current), S(current), L(current), R(current) };
@@ -45,13 +45,19 @@ public class Main {
                 int next = nextNumbers[i];
                 if (!visited[next]) {
                     visited[next] = true;
-                    commands[next] = commands[current] + commandChars[i];
+                    prev[next] = current;
+                    commands[next] = commandChars[i];
                     queue.add(next);
                 }
             }
         }
 
-        return "";
+        StringBuilder sb = new StringBuilder();
+        for (int i = B; i != A; i = prev[i]) {
+            sb.append(commands[i]);
+        }
+
+        return sb.reverse().toString();
     }
 
     public static int D(int n) {
