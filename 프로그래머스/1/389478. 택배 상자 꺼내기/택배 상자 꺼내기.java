@@ -4,44 +4,22 @@ import java.util.*;
 
 class Solution {
     public int solution(int n, int w, int num) {
-        int floor = (int) Math.ceil((double) n / w);
-        int[][] arr = new int[floor][w];
-        
-        int box = 1;
-        int row = 0, col = 0;
+        int totalRows = (int) Math.ceil((double) n / w);
 
-        for (int i = 0; i < floor; i++) {
-            if (i % 2 == 0) {
-                for (int j = 0; j < w; j++) {
-                    if (box == num) { 
-                        row = i; 
-                        col = j; 
-                    }
-                    
-                    arr[i][j] = box++;
-                    
-                    if (box > n) 
-                        break;
-                }
-            } else {
-                for (int j = w - 1; j >= 0; j--) {
-                    if (box == num) { 
-                        row = i; 
-                        col = j; 
-                    }
-                    
-                    arr[i][j] = box++;
-                    
-                    if (box > n) 
-                        break;
-                }
-            }
+        int row = (int) Math.ceil((double) num / w) - 1;
+        int col = (num - 1) % w;
+
+        if (row % 2 == 1) {
+            col = w - 1 - col;
+        }
+
+        int answer = 1;
+        for (int r = row + 1; r < totalRows; r++) {
+            int c = (r % 2 == 0) ? col : (w - 1 - col);
+            int boxNum = r * w + c + 1;
+            if (boxNum <= n) answer++;
         }
         
-        int answer = 0;
-        for (int i = row; i < floor; i++) {
-            if (arr[i][col] != 0) answer++;
-        }
         return answer;
     }
 }
