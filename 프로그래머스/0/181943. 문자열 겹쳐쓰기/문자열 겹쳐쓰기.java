@@ -1,19 +1,7 @@
-import java.util.*;
-
 class Solution {
-    public String solution(String myString, String overwriteString, int s) {
-        StringBuilder sb = new StringBuilder();
-
-        char[] charArray = myString.toCharArray();
-        for (int i = 0; i < charArray.length; i++) {            
-            if (s <= i && i < s + overwriteString.length()) {
-                sb.append(overwriteString.charAt(i - s));
-            } else {
-                sb.append(charArray[i]);
-            }
-        }
-        
-        return sb.toString();        
+    public String solution(String my_string, String overwrite_string, int s) {
+        String before = my_string.substring(0, s);
+        String after = my_string.substring(s + overwrite_string.length());
+        return before + overwrite_string + after;
     }
 }
-
